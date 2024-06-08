@@ -101,7 +101,7 @@ const SignIn = () => {
             </button>
 
             <div className="flex mt-2">
-              <p>Don't have an account?</p>
+              <p>Don&apos;t have an account?</p>
               <Link
                 href="/sign-up"
                 className="font-bold text-[#3f51b5] ml-1 hover:text-[#5c6bc0]"

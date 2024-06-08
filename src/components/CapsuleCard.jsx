@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export default function CapsuleCard() {
-  const openingDate = new Date("2025-06-06T12:57:00"); // Hardcoded opening date for testing
+  const openingDate = useMemo(() => new Date("2025-06-06T12:57:00"), []); // Memoize the opening date
   const [timeRemaining, setTimeRemaining] = useState({
     days: 0,
     hours: 0,
@@ -13,20 +13,13 @@ export default function CapsuleCard() {
   const [countdownFinished, setCountdownFinished] = useState(false);
 
   useEffect(() => {
-    const now = new Date();
-    const diff = Math.max(openingDate - now, 0);
-
-    if (diff === 0) {
-      setCountdownFinished(true);
-    }
-
-    const intervalId = setInterval(() => {
+    const updateCountdown = () => {
       const now = new Date();
       const diff = Math.max(openingDate - now, 0);
 
       if (diff === 0) {
         setCountdownFinished(true);
-        clearInterval(intervalId);
+        return;
       }
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -37,7 +30,11 @@ export default function CapsuleCard() {
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
       setTimeRemaining({ days, hours, minutes, seconds });
-    }, 1000);
+    };
+
+    updateCountdown(); // Initial call to set the countdown immediately
+
+    const intervalId = setInterval(updateCountdown, 1000); // Update every second
 
     return () => clearInterval(intervalId);
   }, [openingDate]);
@@ -46,7 +43,7 @@ export default function CapsuleCard() {
     <div className="bg-white rounded-lg [box-shadow:rgba(0,_0,_0,_0.1)_0px_4px_12px] p-4">
       <div className="mb-4">
         <h2 className="text-xl font-semibold">
-          Memories With Ghofrane date 6th june 2024
+          Memories With Ghofrane date 6th June 2025
         </h2>
       </div>
       <div className="flex items-center justify-between mb-4">
@@ -65,13 +62,6 @@ export default function CapsuleCard() {
               </span>
               days
             </div>
-
-            {/* <div>
-              <span className="countdown font-mono text-4xl">
-                <span style={{ "--value": timeRemaining.days }}></span>
-              </span>
-              days
-            </div> */}
             <div>
               <span className="countdown font-mono text-4xl">
                 <span style={{ "--value": timeRemaining.hours }}></span>
@@ -92,12 +82,6 @@ export default function CapsuleCard() {
             </div>
           </div>
         </div>
-
-        {/* <Link href={`/capsules/${id}`}>
-          <a className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-md hover:bg-opacity-70 transition duration-300">
-            View Details
-          </a>
-        </Link> */}
 
         {countdownFinished && (
           <div className="mt-4 flex items-center justify-center">
