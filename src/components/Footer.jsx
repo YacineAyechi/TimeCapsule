@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer footer-center p-10 bg-[#d4d4d4] text-[#3f51b5]">
       <aside>
-        <Image src="/logo-white.png" alt="" width={150} height={150} />
+        <Image src="/logo-white.png" alt="" width={150} height={150} priority />
         <p className="font-bold mt-2">
           Preserving your precious moments since 2024
         </p>

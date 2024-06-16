@@ -1,10 +1,10 @@
 "use client";
 
-import { signUp } from "@/auth/auth";
-import axios from "axios";
+import { signUp } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const SignUp = () => {
@@ -66,49 +66,20 @@ const SignUp = () => {
 
     setErrors(newErrors);
 
-    //   if (Object.keys(newErrors).length === 0) {
-    //     try {
-    //       const response = await axios.post("/api/sign-up", {
-    //         username,
-    //         email,
-    //         password,
-    //       });
-
-    //       if (response.data.success) {
-    //         // Redirect or show success message
-    //         console.log("Signup successful!");
-    //       } else {
-    //         setErrors(response.data.message);
-    //       }
-    //     } catch (error) {
-    //       console.error("Error signing up:", error);
-    //       setErrors("An error occurred while signing up.");
-    //     }
-    //   }
-    // };
-
     if (Object.keys(newErrors).length === 0) {
       try {
-        const { user, error } = await signUp(
-          formData.email,
-          formData.password,
-          formData.username
-        );
-
-        if (error) {
-          throw error;
-        }
-
-        // Redirect or show success message
-        router.push("/dashboard");
+        await signUp(formData.email, formData.password);
+        toast.success("Successfully Signed Up!");
+        router.push("/capsules");
       } catch (error) {
-        console.error("Error signing up:", error);
-        setErrors({ signUpError: "An error occurred while signing up." });
+        setErrors({ general: error.message });
+        toast.error("Failed to Sign Up. Please Try Again.");
       }
     }
   };
   return (
     <div className="my-14">
+      <Toaster />
       <h1 className="font-bold text-center text-4xl">Sign Up</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/12 items-center mx-auto rounded-full"></div>
       <div className="flex justify-center items-center mx-auto">

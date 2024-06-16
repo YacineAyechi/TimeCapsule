@@ -1,16 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IoIosCloseCircle, IoIosCloseCircleOutline } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/AuthContext";
+import { storage, db } from "@/lib/firebase"; // assuming you have Firebase initialized
+import { ref, uploadBytesResumable } from "firebase/storage"; // Import ref and uploadBytesResumable from Firebase storage
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import toast, { Toaster } from "react-hot-toast";
 
 const CreateCapsule = () => {
+  const router = useRouter();
+  const { user, loading } = useAuth(); // assuming useAuth() returns user and loading status
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [openingDate, setOpeningDate] = useState("");
   const [category, setCategory] = useState("");
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
+  const [formDisabled, setFormDisabled] = useState(true); // Add state to disable form
 
   const handleFileUpload = (event) => {
     const uploadedFiles = Array.from(event.target.files);
@@ -34,16 +44,52 @@ const CreateCapsule = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (validateForm()) {
-      // Handle form submission logic here
-      console.log({ title, description, openingDate, category, files });
+    if (!formDisabled && validateForm()) {
+      try {
+        const capsuleRef = await addDoc(collection(db, "capsules"), {
+          title,
+          description,
+          openingDate,
+          category,
+          createdBy: user.uid, // Assuming user object contains user's UID
+          createdAt: new Date(),
+        });
+
+        // Upload files to Firebase Storage
+        for (const file of files) {
+          const fileRef = ref(
+            storage,
+            `capsule_files/${capsuleRef.id}/${file.name}`
+          ); // Create a storage reference
+          await uploadBytesResumable(fileRef, file); // Upload file
+        }
+
+        toast.success("Capsule Created Successfully!");
+        router.push("/capsules");
+      } catch (error) {
+        console.error("Error creating capsule:", error);
+        // Handle error
+      }
     }
   };
 
+  useEffect(() => {
+    if (!user && !loading) {
+      router.push("/sign-in"); // Redirect to login page if user is not authenticated
+    } else {
+      setFormDisabled(false); // Enable the form once user authentication status is determined
+    }
+  }, [user, loading, router]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="p-5">
+      <Toaster />
       <h1 className="font-bold text-center text-4xl">Create Capsule</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
 
@@ -79,16 +125,16 @@ const CreateCapsule = () => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue>
                   Select a Category
                 </option>
-                <option value="personal-memories">Personal Memories</option>
-                <option value="events">Events</option>
-                <option value="historical-moments">Historical Moments</option>
-                <option value="hobbies-interests">Hobbies and Interests</option>
-                <option value="work-education">Work and Education</option>
-                <option value="future-messages">Future Messages</option>
-                <option value="other">Other</option>
+                <option value="Personal Memories">Personal Memories</option>
+                <option value="Events">Events</option>
+                <option value="Historical Moments">Historical Moments</option>
+                <option value="Hobbies Interests">Hobbies and Interests</option>
+                <option value="Work Education">Work and Education</option>
+                <option value="Future Messages">Future Messages</option>
+                <option value="Other">Other</option>
               </select>
 
               {errors.openingDate && (
@@ -225,11 +271,11 @@ const CreateCapsule = () => {
           </div>
 
           <div>
-            <button type="button" className="btn signUpBtn mt-4 w-1/6">
+            {/* <button type="button" className="btn signUpBtn mt-4 w-1/6">
               Save as Draft
-            </button>
+            </button> */}
 
-            <button type="submit" className="btn signUpBtn ml-2 w-1/6">
+            <button type="submit" className="btn signUpBtn mt-2 w-1/6">
               Create Capsule
             </button>
           </div>

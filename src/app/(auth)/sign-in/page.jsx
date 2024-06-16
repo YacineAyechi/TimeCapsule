@@ -1,10 +1,14 @@
 "use client";
 
+import { login } from "@/lib/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const SignIn = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -35,19 +39,28 @@ const SignIn = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
     setErrors(formErrors);
 
     if (Object.keys(formErrors).length === 0) {
-      // Form is valid, submit the data
-      console.log("Form submitted successfully", formData);
+      try {
+        await login(formData.email, formData.password);
+        toast.success("Successfully Signed In!");
+
+        router.push("/capsules");
+      } catch (error) {
+        // setErrors(error.message);
+        setErrors({ login: error.message });
+        toast.error("Failed to Sign In. Please Try Again.");
+      }
     }
   };
 
   return (
     <div className="my-14">
+      <Toaster />
       <h1 className="font-bold text-center text-4xl">Sign In</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/12 items-center mx-auto rounded-full"></div>
       <div className="flex justify-center items-center mx-auto">

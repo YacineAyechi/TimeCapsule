@@ -46,7 +46,7 @@
 }
 
 .fill-current {
-  fill: var(--accent-color);
+  fill: var(--main-color);
 }
 
 .navbar li a:hover {
