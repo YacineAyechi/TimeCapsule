@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { IoIosCloseCircle, IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContext";
 import { storage, db } from "@/lib/firebase"; // assuming you have Firebase initialized
 import { ref, uploadBytesResumable } from "firebase/storage"; // Import ref and uploadBytesResumable from Firebase storage
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 
 const CreateCapsule = () => {
@@ -21,6 +21,7 @@ const CreateCapsule = () => {
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [formDisabled, setFormDisabled] = useState(true); // Add state to disable form
+  const [loadingSubmit, setLoadingSubmit] = useState(false); // Add state to manage form submission loading
 
   const handleFileUpload = (event) => {
     const uploadedFiles = Array.from(event.target.files);
@@ -47,6 +48,8 @@ const CreateCapsule = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!formDisabled && validateForm()) {
+      setLoadingSubmit(true); // Set loading state to true
+
       try {
         const capsuleRef = await addDoc(collection(db, "capsules"), {
           title,
@@ -70,7 +73,9 @@ const CreateCapsule = () => {
         router.push("/capsules");
       } catch (error) {
         console.error("Error creating capsule:", error);
-        // Handle error
+        toast.error("Failed to create capsule. Please try again.");
+      } finally {
+        setLoadingSubmit(false); // Set loading state to false
       }
     }
   };
@@ -83,6 +88,16 @@ const CreateCapsule = () => {
     }
   }, [user, loading, router]);
 
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -94,7 +109,10 @@ const CreateCapsule = () => {
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
 
       <div className="flex justify-center items-center mx-auto">
-        <form className="capsule-form" onSubmit={handleSubmit}>
+        <form
+          className="capsule-form justify-center items-center mx-auto"
+          onSubmit={handleSubmit}
+        >
           <div className="flex ">
             <div className="w-full max-w-xs">
               <label className="text-[#3f51b5] font-bold">
@@ -156,6 +174,7 @@ const CreateCapsule = () => {
                 className="input input-bordered w-full max-w-xs mt-2 "
                 value={openingDate}
                 onChange={(e) => setOpeningDate(e.target.value)}
+                min={getCurrentDateTime()} // Set the min attribute to the current date and time
               />
               {errors.openingDate && (
                 <p className="text-red-500 text-sm mt-2">
@@ -220,7 +239,7 @@ const CreateCapsule = () => {
             )}
           </div>
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <label className="block text-lg font-semibold text-blue-700">
               Preview
             </label>
@@ -231,8 +250,8 @@ const CreateCapsule = () => {
                     <Image
                       src={URL.createObjectURL(file)}
                       alt={file.name}
-                      width={100}
-                      height={100}
+                      width={300}
+                      height={300}
                       className="w-full h-full group-hover:opacity-50"
                     />
                   )}
@@ -268,17 +287,15 @@ const CreateCapsule = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
-          <div>
-            {/* <button type="button" className="btn signUpBtn mt-4 w-1/6">
-              Save as Draft
-            </button> */}
-
-            <button type="submit" className="btn signUpBtn mt-2 w-1/6">
-              Create Capsule
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="btn signUpBtn mt-2 w-1/6"
+            disabled={loadingSubmit}
+          >
+            {loadingSubmit ? "Creating..." : "Create Capsule"}
+          </button>
         </form>
       </div>
     </div>

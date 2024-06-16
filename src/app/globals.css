@@ -11,6 +11,7 @@
   --highlight-color: #ffeb3b;
 
   --mainHover-color: #5c6bc0;
+  --accentHover-color: #fc8764;
 }
 
 .signInBtn {
@@ -56,4 +57,19 @@
 .navbar li a:active {
   background-color: var(--main-color) !important;
   color: white !important;
+}
+
+.btn:disabled {
+  border: none;
+}
+
+.deleteBtn {
+  background-color: #ff5722;
+  margin-right: 8px;
+  border: 2px solid var(--accent-color);
+}
+
+.deleteBtn:hover {
+  background-color: #fc8764;
+  border: 2px solid var(--accentHover-color);
 }

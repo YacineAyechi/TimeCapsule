@@ -4,6 +4,7 @@ import React, { useMemo, useEffect, useState } from "react";
 import Link from "next/link";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { MdOutlineDelete } from "react-icons/md";
 
 const CapsuleCard = ({ capsule, onDelete }) => {
   const openingDate = useMemo(() => new Date(capsule.openingDate), []); // Memoize the opening date
@@ -51,6 +52,14 @@ const CapsuleCard = ({ capsule, onDelete }) => {
     }
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const formattedDate = `${d.getDate()}/${
+      d.getMonth() + 1
+    }/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`;
+    return formattedDate;
+  };
+
   return (
     <div className="bg-white rounded-lg [box-shadow:rgba(0,_0,_0,_0.1)_0px_4px_12px] p-4">
       <div className="mb-4">
@@ -58,7 +67,7 @@ const CapsuleCard = ({ capsule, onDelete }) => {
       </div>
       <div className="flex items-center justify-between mb-4">
         <span className="text-gray-500">{capsule.category}</span>
-        <span className="text-gray-500">{capsule.openingDate}</span>
+        <span className="text-gray-500">{formatDate(capsule.openingDate)}</span>
       </div>
       <div className="relative">
         <div className="flex justify-center items-center">
@@ -93,20 +102,20 @@ const CapsuleCard = ({ capsule, onDelete }) => {
           </div>
         </div>
 
-        {!countdownFinished && (
-          <button
-            onClick={handleDelete}
-            className="ml-4 px-3 py-1 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600"
-          >
-            Delete
-          </button>
-        )}
-
-        {countdownFinished && (
+        {countdownFinished ? (
           <div className="mt-4 flex items-center justify-center">
+            <div className="btn deleteBtn" onClick={handleDelete}>
+              <MdOutlineDelete className="text-white text-xl" />
+            </div>
             <Link href={`/capsules/${capsule.id}`} className="btn signUpBtn">
               View Details
             </Link>
+          </div>
+        ) : (
+          <div className="mt-4 flex items-center justify-center">
+            <div className="btn deleteBtn" onClick={handleDelete}>
+              <MdOutlineDelete className="text-white text-xl" />
+            </div>
           </div>
         )}
       </div>

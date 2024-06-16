@@ -9,6 +9,7 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ const Contact = () => {
       toast.error("All fields are required!");
       return;
     }
+    setLoadingSubmit(true);
 
     try {
       await addDoc(collection(db, "contacts"), {
@@ -31,7 +33,8 @@ const Contact = () => {
       setMessage("");
     } catch (error) {
       toast.error("Failed to send message!");
-      console.error("Error adding document: ", error);
+    } finally {
+      setLoadingSubmit(false);
     }
   };
 
@@ -41,7 +44,7 @@ const Contact = () => {
       <h1 className="font-bold text-center text-4xl">Contact Us</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
 
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         <form className="capsule-form w-full max-w-2xl" onSubmit={handleSubmit}>
           <div className="w-full max-w-2xl">
             <label className="text-[#3f51b5] font-bold">
@@ -90,8 +93,9 @@ const Contact = () => {
           <button
             type="submit"
             className="btn signUpBtn mt-4 mb-2 w-1/2 flex justify-center items-center mx-auto"
+            disabled={loadingSubmit}
           >
-            Send
+            {loadingSubmit ? "Sending..." : "Send"}
           </button>
         </form>
       </div>
