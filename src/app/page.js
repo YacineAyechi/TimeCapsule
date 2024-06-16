@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 export default function Home() {
   return (
     <>
+      <title>TimeCapsule</title>
       <Hero />
       <Features />
       <Faq />

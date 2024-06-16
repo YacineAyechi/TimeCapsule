@@ -5,6 +5,7 @@ import Link from "next/link";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { MdOutlineDelete } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
 
 const CapsuleCard = ({ capsule, onDelete }) => {
   const openingDate = useMemo(() => new Date(capsule.openingDate), []); // Memoize the opening date
@@ -47,8 +48,10 @@ const CapsuleCard = ({ capsule, onDelete }) => {
     try {
       await deleteDoc(doc(db, "capsules", capsule.id));
       onDelete(capsule.id); // Notify parent component about deletion
+      toast.success("Capsule Deleted Successfully!");
     } catch (error) {
       console.error("Error deleting capsule:", error);
+      toast.error("Failed to Delete Capsule. Please Try Again.");
     }
   };
 
@@ -62,6 +65,7 @@ const CapsuleCard = ({ capsule, onDelete }) => {
 
   return (
     <div className="bg-white rounded-lg [box-shadow:rgba(0,_0,_0,_0.1)_0px_4px_12px] p-4">
+      <Toaster />
       <div className="mb-4">
         <h2 className="text-xl font-semibold capitalize">{capsule.title}</h2>
       </div>

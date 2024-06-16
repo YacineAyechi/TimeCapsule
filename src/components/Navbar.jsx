@@ -66,7 +66,7 @@ const Navbar = () => {
                 <Link href="/contact">Contact Us</Link>
               </li>
               <li>
-                <Link href="/about">About</Link>
+                <Link href="/about">About Us</Link>
               </li>
             </ul>
           ) : (
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <Link href="/contact">Contact Us</Link>
               </li>
               <li>
-                <Link href="/about">About</Link>
+                <Link href="/about">About Us</Link>
               </li>
             </ul>
           )}
@@ -113,7 +113,7 @@ const Navbar = () => {
               <Link href="/contact">Contact Us</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about">About Us</Link>
             </li>
           </ul>
         ) : (
@@ -125,7 +125,7 @@ const Navbar = () => {
               <Link href="/contact">Contact Us</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about">About Us</Link>
             </li>
           </ul>
         )}

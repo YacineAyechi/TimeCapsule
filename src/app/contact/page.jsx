@@ -41,9 +41,9 @@ const Contact = () => {
   return (
     <div className="p-5">
       <Toaster />
+      <title>TimeCapsule | Contact Us</title>
       <h1 className="font-bold text-center text-4xl">Contact Us</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
-
       <div className="flex justify-center items-center">
         <form className="capsule-form w-full max-w-2xl" onSubmit={handleSubmit}>
           <div className="w-full max-w-2xl">

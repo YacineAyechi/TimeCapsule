@@ -80,6 +80,7 @@ const SignUp = () => {
   return (
     <div className="my-14">
       <Toaster />
+      <title>TimeCapsule | Sign Up</title>
       <h1 className="font-bold text-center text-4xl">Sign Up</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/12 items-center mx-auto rounded-full"></div>
       <div className="flex justify-center items-center mx-auto">

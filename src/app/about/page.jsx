@@ -3,9 +3,9 @@ import React from "react";
 const About = () => {
   return (
     <div className="mx-auto p-12">
+      <title>TimeCapsule | About Us</title>
       <h1 className="text-4xl font-bold mb-2 text-center">About Us</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-[12%] items-center mx-auto rounded-full"></div>
-
       <p className="text-lg leading-relaxed mb-6">
         Welcome to our website! We are dedicated to helping you create and
         preserve memories through our innovative time capsule platform. Our goal

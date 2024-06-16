@@ -6,6 +6,7 @@ import { db } from "@/lib/firebase";
 import CapsuleCard from "@/components/CapsuleCard";
 import { useAuth } from "@/lib/AuthContext";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 const MyCapsules = ({ capsules }) => {
   const { user, loading } = useAuth();
@@ -47,6 +48,8 @@ const MyCapsules = ({ capsules }) => {
 
   return (
     <div className="flex flex-col min-h-[56.5vh]">
+      <Toaster />
+      <title>TimeCapsule | My Capsules</title>
       <div className="container mx-auto px-4 pt-7">
         <h1 className="font-bold text-center text-4xl">My Capsules</h1>
         <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/6 items-center mx-auto rounded-full"></div>

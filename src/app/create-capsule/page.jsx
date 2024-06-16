@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContext";
 import { storage, db } from "@/lib/firebase"; // assuming you have Firebase initialized
@@ -70,6 +68,7 @@ const CreateCapsule = () => {
         }
 
         toast.success("Capsule Created Successfully!");
+        console.log("created");
         router.push("/capsules");
       } catch (error) {
         console.error("Error creating capsule:", error);
@@ -105,9 +104,9 @@ const CreateCapsule = () => {
   return (
     <div className="p-5">
       <Toaster />
+      <title>TimeCapsule | Create Capsule</title>
       <h1 className="font-bold text-center text-4xl">Create Capsule</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
-
       <div className="flex justify-center items-center mx-auto">
         <form
           className="capsule-form justify-center items-center mx-auto"
