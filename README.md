@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://time-capsule-eosin.vercel.app/_next/image?url=%2Flogo-white.png&w=256&q=75" alt="img"/>
+<img src="https://cdn.discordapp.com/attachments/1252581821049475162/1252581821204402196/logo-black.png?ex=6672bd3a&is=66716bba&hm=06e870534d448a2fe6c6d67828c3c8a3f65d2653564dfbe86473630c870c8109&" alt="img"/>
 </p>
 
 # TimeCapsule
