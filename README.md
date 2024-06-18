@@ -1,5 +1,7 @@
-<p align="center">
-<img src="https://cdn.discordapp.com/attachments/1252581821049475162/1252581821204402196/logo-black.png?ex=6672bd3a&is=66716bba&hm=06e870534d448a2fe6c6d67828c3c8a3f65d2653564dfbe86473630c870c8109&" alt="img"/>
+<p  align="center">
+
+<img  src="https://cdn.discordapp.com/attachments/1252581821049475162/1252581821204402196/logo-black.png?ex=6672bd3a&is=66716bba&hm=06e870534d448a2fe6c6d67828c3c8a3f65d2653564dfbe86473630c870c8109&"  alt="img"/>
+
 </p>
 
 # TimeCapsule
@@ -15,44 +17,61 @@ https://time-capsule-eosin.vercel.app/
 Clone the project
 
 ```bash
-  git clone https://github.com/YacineAyechi/TimeCapsule.git
+
+git  clone  https://github.com/YacineAyechi/TimeCapsule.git
+
 ```
 
 Go to the project directory
 
 ```bash
-  cd TimeCapsule
+
+cd  TimeCapsule
+
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+
+npm  install
+
 ```
 
 Start the server
 
 ```bash
-  npm run dev
+
+npm  run  dev
+
 ```
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`NEXT_PUBLIC_FIREBASE_API_KEY`=FirebaseApiKey
-`NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`=FirebaseAuthDomain
-`NEXT_PUBLIC_FIREBASE_DATABASE_URL`=FirebaseDatabaseUrl
-`NEXT_PUBLIC_FIREBASE_PROJECT_ID`=FirebaseProjectId
-`NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`=FirebaseStorageBucket
-`NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`=FirebaseMessagingSenderId
-`NEXT_PUBLIC_FIREBASE_APP_ID`=FirebaseAppId
+`NEXT_PUBLIC_FIREBASE_API_KEY`=FirebaseApiKey <br/>
+
+`NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`=FirebaseAuthDomain <br/>
+
+`NEXT_PUBLIC_FIREBASE_DATABASE_URL`=FirebaseDatabaseUrl <br/>
+
+`NEXT_PUBLIC_FIREBASE_PROJECT_ID`=FirebaseProjectId <br/>
+
+`NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`=FirebaseStorageBucket <br/>
+
+`NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`=FirebaseMessagingSenderId <br/>
+
+`NEXT_PUBLIC_FIREBASE_APP_ID`=FirebaseAppId <br/>
 
 ## Features
 
 - **Create Time Capsules:** Easily create digital time capsules to store your important media files.
+
 - **Media Storage:** Store photos, videos, and audios in a secure and organized manner.
+
 - **Future Discovery:** Set release dates for your capsules, ensuring they are discovered at the perfect moment.
+
 - **User-Friendly Interface:** Enjoy a seamless and intuitive user experience with a modern design.
 
 ## FAQ
