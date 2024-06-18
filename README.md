@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+<img src="https://time-capsule-eosin.vercel.app/_next/image?url=%2Flogo-white.png&w=256&q=75" alt="img"/>
+</p>
 
-## Getting Started
+# TimeCapsule
 
-First, run the development server:
+**TimeCapsule** is a dynamic web application that empowers users to create and curate digital time capsules. These capsules act as virtual vaults, allowing users to store meaningful photos, videos, and audios for future discovery or sharing. Whether it's preserving cherished memories, documenting significant events, or leaving messages for future generations, TimeCapsule provides a secure and user-friendly platform to safeguard your digital legacy.
+
+## Demo
+
+https://time-capsule-eosin.vercel.app/
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/YacineAyechi/TimeCapsule.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+  cd TimeCapsule
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your .env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`API_KEY`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`ANOTHER_API_KEY`
+
+## Features
+
+- **Create Time Capsules:** Easily create digital time capsules to store your important media files.
+- **Media Storage:** Store photos, videos, and audios in a secure and organized manner.
+- **Future Discovery:** Set release dates for your capsules, ensuring they are discovered at the perfect moment.
+- **User-Friendly Interface:** Enjoy a seamless and intuitive user experience with a modern design.
+
+## FAQ
+
+#### What is TimeCapsule?
+
+- TimeCapsule is a platform that allows users to create and store digital capsules containing memories, messages, and files to be opened at a future date.
+
+#### How does TimeCapsule work?
+
+- Users can create a capsule, add contents such as photos, videos, and text messages, and set an opening date for the capsule. The capsule remains sealed until the specified opening date, at which point it can be unlocked and its contents revealed.
+
+#### What can I include in my TimeCapsule?
+
+- You can include a variety of digital content in your TimeCapsule, including photos, videos, documents, letters, and more. Get creative and personalize your capsule with meaningful memories and messages.
+
+#### Is TimeCapsule free to use?
+
+- Yes, TimeCapsule offers a free basic plan with limited features. We also offer premium plans with additional storage space, customization options, and advanced features for users who require more functionality.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
