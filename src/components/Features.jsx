@@ -14,7 +14,7 @@ const Features = () => {
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/4 items-center mx-auto rounded-full"></div>
 
       <div className="flex justify-center items-center">
-        <div className="grid grid-cols-3 gap-8 items-center justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-center">
           <div className="card w-96 bg-[#e3f2fd] text-[#3f51b5]">
             <div className="card-body">
               <FaCapsules className="text-5xl" />

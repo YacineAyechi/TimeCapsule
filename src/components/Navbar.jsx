@@ -5,6 +5,7 @@ import { logout } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -51,7 +52,7 @@ const Navbar = () => {
           {user ? (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-white"
             >
               <li>
                 <Link href="/">Home</Link>
@@ -72,7 +73,7 @@ const Navbar = () => {
           ) : (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-white"
             >
               <li>
                 <Link href="/">Home</Link>
@@ -144,21 +145,51 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link href="/sign-in" className="btn signInBtn">
-              Sign In
-            </Link>
-            <Link href="/sign-up" className="btn signUpBtn">
-              Sign Up
-            </Link>
+            <div className="lg:hidden">
+              <Link href="/sign-in" className="btn btn-ghost">
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 12H9m0 0H5m4 0V9m0 3v3m0 0h6m-6 0h4m4 0H9m4 0h6"
+                  />
+                </svg> */}
+                <MdOutlineAccountCircle className="h-8 w-8" />
+              </Link>
+              {/* <Link href="/sign-up" className="btn btn-ghost">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </Link> */}
+            </div>
+            <div className="hidden lg:flex">
+              <Link href="/sign-in" className="btn signInBtn">
+                Sign In
+              </Link>
+              <Link href="/sign-up" className="btn signUpBtn">
+                Sign Up
+              </Link>
+            </div>
           </>
         )}
-
-        {/* <Link href="/sign-in" className="btn signInBtn">
-          Sign In
-        </Link>
-        <Link href="/sign-up" className="btn signUpBtn">
-          Sign Up
-        </Link> */}
       </div>
     </div>
   );

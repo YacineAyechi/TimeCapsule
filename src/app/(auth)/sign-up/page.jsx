@@ -193,7 +193,7 @@ const SignUp = () => {
                 />
                 <span className="label-text font-bold ml-2">
                   I agree to the{" "}
-                  <Link href="#" className="text-[#3f51b5]">
+                  <Link href="/terms" className="text-[#3f51b5]">
                     Terms and Conditions
                   </Link>
                 </span>

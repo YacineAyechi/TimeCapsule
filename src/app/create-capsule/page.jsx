@@ -107,13 +107,13 @@ const CreateCapsule = () => {
       <title>TimeCapsule | Create Capsule</title>
       <h1 className="font-bold text-center text-4xl">Create Capsule</h1>
       <div className="border-2 border-[#3f51b5] mt-3 mb-9 flex justify-center w-1/5 items-center mx-auto rounded-full"></div>
-      <div className="flex justify-center items-center mx-auto">
+      <div className="md:flex justify-center items-center mx-auto ">
         <form
           className="capsule-form justify-center items-center mx-auto"
           onSubmit={handleSubmit}
         >
-          <div className="flex ">
-            <div className="w-full max-w-xs">
+          <div className="md:flex">
+            <div className="w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">
                 Capsule Title <span className="text-red-500">*</span>
               </label>
@@ -121,7 +121,7 @@ const CreateCapsule = () => {
               <input
                 type="text"
                 placeholder="Enter the title of your capsule"
-                className="input input-bordered w-full max-w-xs mt-2"
+                className="input input-bordered w-full md:max-w-xs mt-2"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 id="title"
@@ -131,13 +131,13 @@ const CreateCapsule = () => {
               )}
             </div>
 
-            <div className="ml-[4.5rem] w-full max-w-xs">
+            <div className="md:ml-[4.5rem] w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">
                 Category <span className="text-red-500">*</span>
               </label>
               <br />
               <select
-                className="select select-bordered w-full max-w-xs mt-2"
+                className="select select-bordered w-full md:max-w-xs mt-2"
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -161,7 +161,7 @@ const CreateCapsule = () => {
               )}
             </div>
 
-            <div className="ml-[4.5rem] w-full max-w-xs">
+            <div className="md:ml-[4.5rem] w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">
                 Date to Open <span className="text-red-500">*</span>
               </label>
@@ -170,10 +170,10 @@ const CreateCapsule = () => {
                 type="datetime-local"
                 placeholder="Type here"
                 id="opening-date"
-                className="input input-bordered w-full max-w-xs mt-2 "
+                className="input input-bordered w-full md:max-w-xs mt-2 "
                 value={openingDate}
                 onChange={(e) => setOpeningDate(e.target.value)}
-                min={getCurrentDateTime()} // Set the min attribute to the current date and time
+                min={getCurrentDateTime()}
               />
               {errors.openingDate && (
                 <p className="text-red-500 text-sm mt-2">
@@ -183,34 +183,34 @@ const CreateCapsule = () => {
             </div>
           </div>
 
-          <div className="flex mt-4">
-            <div className=" w-full max-w-xs">
+          <div className="md:flex mt-4">
+            <div className=" w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">Add Photos</label>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full max-w-xs mt-2"
+                className="file-input file-input-bordered w-full md:max-w-xs mt-2"
                 accept="image/*"
                 multiple
                 onChange={handleFileUpload}
               />
             </div>
 
-            <div className="ml-[4.5rem] w-full max-w-xs">
+            <div className="md:ml-[4.5rem] w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">Add Videos</label>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full max-w-xs mt-2"
+                className="file-input file-input-bordered w-full md:max-w-xs mt-2"
                 accept="video/*"
                 multiple
                 onChange={handleFileUpload}
               />
             </div>
 
-            <div className="ml-[4.5rem] w-full max-w-xs">
+            <div className="md:ml-[4.5rem] w-full md:max-w-xs">
               <label className="text-[#3f51b5] font-bold">Add Audio</label>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full max-w-xs mt-2"
+                className="file-input file-input-bordered w-full md:max-w-xs mt-2"
                 accept="audio/*"
                 multiple
                 onChange={handleFileUpload}
@@ -238,59 +238,9 @@ const CreateCapsule = () => {
             )}
           </div>
 
-          {/* <div className="mt-4">
-            <label className="block text-lg font-semibold text-blue-700">
-              Preview
-            </label>
-            <div className="preview-section">
-              {files.map((file, index) => (
-                <div key={index} className="relative w-1/6 h-1/6 group">
-                  {file.type.startsWith("image") && (
-                    <Image
-                      src={URL.createObjectURL(file)}
-                      alt={file.name}
-                      width={300}
-                      height={300}
-                      className="w-full h-full group-hover:opacity-50"
-                    />
-                  )}
-                  {file.type.startsWith("video") && (
-                    <video
-                      controls
-                      className="w-full h-full group-hover:opacity-50"
-                    >
-                      <source
-                        src={URL.createObjectURL(file)}
-                        type={file.type}
-                      />
-                    </video>
-                  )}
-                  {file.type.startsWith("audio") && (
-                    <audio
-                      controls
-                      className="w-full h-full group-hover:opacity-50"
-                    >
-                      <source
-                        src={URL.createObjectURL(file)}
-                        type={file.type}
-                      />
-                    </audio>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveFile(index)}
-                    className="absolute top-2 right-2  text-white rounded-full p-2 "
-                  >
-                    <IoIosCloseCircleOutline className="text-[#3f51b5] w-14 h-14 font-bold" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div> */}
-
           <button
             type="submit"
-            className="btn signUpBtn mt-2 w-1/6"
+            className="btn signUpBtn mt-2 md:w-1/6"
             disabled={loadingSubmit}
           >
             {loadingSubmit ? "Creating..." : "Create Capsule"}
